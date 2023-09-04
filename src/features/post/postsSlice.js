@@ -1,8 +1,31 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { sub } from "date-fns";
 
 const initialState = [
-    {id: '1', title:'Learning Redux Toolkit', content:'i love redux.'},
-    {id: '2', title:'Learning Redux Slices...', content:'i love slice.'},
+    {id: '1',
+     title:'Learning Redux Toolkit',
+      content:'i love redux.', 
+      date: sub(new Date(), { minutes: 10 }).toISOString(), 
+      reactions: {
+        thumbsUp: 0,
+        wow: 0,
+        heart: 0,
+        rocket: 0,
+        coffee: 0,
+      },
+    },
+    {id: '2',
+     title:'Learning Redux Slices...',
+      content:'i love slice.', 
+      date: sub(new Date(), { minutes: 5 }).toISOString(), 
+      reactions: {
+        thumbsUp: 0,
+        wow: 0,
+        heart: 0,
+        rocket: 0,
+        coffee: 0,
+      },
+    },
 ]
 
 const postsSlice = createSlice({
@@ -18,10 +41,25 @@ const postsSlice = createSlice({
             payload: {
             id: nanoid(),
             title,
-            content, 
-            userId
+            content,
+            date: new Date().toISOString(), 
+            userId, 
+            reactions: {
+        thumbsUp: 0,
+        wow: 0,
+        heart: 0,
+        rocket: 0,
+        coffee: 0,
+      },
             }
             }
+        }
+    },
+    reactionAdded (state, action) {
+        const {postId, reaction } = action.payload
+        const existingPost = state.find(post => postId.id === postId)
+        if (existingPost) {
+            existingPost.reactions[reaction]++
         }
     }
     }
@@ -29,5 +67,5 @@ const postsSlice = createSlice({
 })
 
 export const selectAllPosts = (state) => state.posts;
-export const {postAdded} = postsSlice.actions
+export const {postAdded, reactionAdded} = postsSlice.actions
 export default postsSlice.reducer
