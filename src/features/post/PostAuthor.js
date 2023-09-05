@@ -4,7 +4,11 @@ import { selectAllUsers } from "../users/usersSlice";
 const PostAuthor = ({ userId }) => {
   const users = useSelector(selectAllUsers);
   const author = users.find((user) => user.id === userId);
-  return <span> by {author ? author.name : "Unknown Author"}</span>;
+  return (
+    <div>
+      <div className="font-semibold text-red-500"><span className="font-normal text-black">By</span> {author ? author.name : "Unknown Author"}</div>
+    </div>
+  );
 };
 
 export default PostAuthor;

@@ -13,24 +13,22 @@ const PostsList = () => {
 
   const renderedPosts = orderedPosts.map((post) => (
     <article
-      className="p-2 m-2 capitalize border border-black rounded-lg"
+      className="p-2 m-2 capitalize border rounded-lg shadow"
       key={post.id}
     >
-      <h3 className="text-2xl ">{post.title}</h3>
+      <h3 className="text-xl font-semibold text-center ">{post.title}</h3>
       <p className="">{post.content.substring(0, 100)}</p>
-      <p className="flex items-center justify-between text-2xl">
+      <div className="flex items-center justify-between">
         <PostAuthor userId={post.userId} />
-        <i className="text-xl text-red-3 00">
-          <TimeAgo timestamp={post.date} />
-        </i>
-      </p>
-      <Reactions post={post} />
+        <Reactions post={post} />
+        <TimeAgo timestamp={post.date} />
+      </div>
     </article>
   ));
 
   return (
     <section className="w-full text-black bg-white ">
-      <h2 className="text-5xl text-center">Posts</h2>
+      <h2 className="text-3xl font-bold text-center uppercase">Posts</h2>
       {renderedPosts}
     </section>
   );

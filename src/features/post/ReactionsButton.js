@@ -17,7 +17,7 @@ const ReactionsButton = ({ post }) => {
       <button
         key={name}
         type="button"
-        className="flex"
+        className="flex items-center justify-center text-red-600"
         onClick={() =>
           dispatch(reactionAdded({ postId: post.id, reaction: name }))
         }
@@ -26,7 +26,9 @@ const ReactionsButton = ({ post }) => {
       </button>
     );
   });
-  return <div>{reactionButtons}</div>;
+  return (
+    <div className="flex items-center gap-2 p-2 text-lg">{reactionButtons}</div>
+  );
 };
 
 export default ReactionsButton;

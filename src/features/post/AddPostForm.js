@@ -44,7 +44,7 @@ const AddPostForm = () => {
           name="postTitle"
           value={title}
           onChange={onTitleChanged}
-          className="p-2 m-2 bg-transparent border-black input"
+          className="p-2 m-2 bg-transparent border border-black input"
         />
         <label htmlFor="postAuthor">Author:</label>
         <select id="postAuthor" value={userId} onChange={onAuthorChanged}>
@@ -59,7 +59,7 @@ const AddPostForm = () => {
           name="postContent"
           value={content}
           onChange={onContentChanged}
-          className="p-2 m-2 bg-transparent border-black input"
+          className="p-2 m-2 bg-transparent border border-black input"
         />
         <button
           className="p-2 m-2 bg-white btn"
