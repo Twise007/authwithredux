@@ -1,30 +1,33 @@
-import { useSelector } from "react-redux";
-import { selectAllPosts } from "./postsSlice";
-import PostAuthor from "./PostAuthor";
-import TimeAgo from "./TimeAgo";
-import Reactions from "./ReactionsButton";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { selectAllPosts, getPostsError, getPostsStatus, fetchPosts } from "./postsSlice";
+import PostExcerpt from "./PostExcerpt";
 
 const PostsList = () => {
+  const dispatch = useDispatch();
+  
   const posts = useSelector(selectAllPosts);
+  const postsStatus = useSelector(getPostsStatus);
+  const error = useSelector(getPostsError);
+  
+  useEffect(() => {
+    if (postStatus === 'idle') {
+      dispatch(fetchPosts())
+    }
+  }, [postStatus, dispatch])
 
-  const orderedPosts = posts
-    .slice()
-    .sort((a, b) => b.date.localeCompare(a.date));
-
-  const renderedPosts = orderedPosts.map((post) => (
-    <article
-      className="p-2 m-2 capitalize border rounded-lg shadow"
+  let content
+  if (postStatus === "loading") {
+    content = <p>'loading...'</p>
+  } else if (postStatus === 'Suceeded') {
+    const orderedPosts = posts.slice().sort((a.b) => b.date.localeCompare(a.date))
+    content = orderedPosts.map(post => <PostExcerpt 
       key={post.id}
-    >
-      <h3 className="text-xl font-semibold text-center ">{post.title}</h3>
-      <p className="">{post.content.substring(0, 100)}</p>
-      <div className="flex items-center justify-between">
-        <PostAuthor userId={post.userId} />
-        <Reactions post={post} />
-        <TimeAgo timestamp={post.date} />
-      </div>
-    </article>
-  ));
+       post={post}/>)
+  } esle if (postStatus === 'failed') {
+    content = <p>{error}</p>
+  }
 
   return (
     <section className="w-full text-black bg-white ">
