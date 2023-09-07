@@ -78,7 +78,8 @@ const postsSlice = createSlice({
         state.posts = state.posts.concat(loadedPosts);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
-        state.status;
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
