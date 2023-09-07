@@ -8,7 +8,7 @@ const PostExcerpt = ({ post }) => {
       className="p-2 m-2 capitalize border rounded-lg shadow"
     >
       <h3 className="text-xl font-semibold text-center ">{post.title}</h3>
-      <p className="">{post.content.substring(0, 100)}</p>
+      <p className="">{post.body.substring(0, 100)}</p>
       <div className="flex items-center justify-between">
         <PostAuthor userId={post.userId} />
         <Reactions post={post} />

@@ -8,7 +8,7 @@ const PostsList = () => {
   const dispatch = useDispatch();
   
   const posts = useSelector(selectAllPosts);
-  const postsStatus = useSelector(getPostsStatus);
+  const postStatus = useSelector(getPostsStatus);
   const error = useSelector(getPostsError);
   
   useEffect(() => {
@@ -19,20 +19,18 @@ const PostsList = () => {
 
   let content
   if (postStatus === "loading") {
-    content = <p>'loading...'</p>
-  } else if (postStatus === 'Suceeded') {
-    const orderedPosts = posts.slice().sort((a.b) => b.date.localeCompare(a.date))
-    content = orderedPosts.map(post => <PostExcerpt 
-      key={post.id}
-       post={post}/>)
-  } esle if (postStatus === 'failed') {
+    content = <p>'loading...'</p>;
+  } else if (postStatus === 'Succeeded') {
+    const orderedPosts = posts.slice().sort((a,b) => b.date.localeCompare(a.date))
+    content = orderedPosts.map(post => <PostExcerpt key={post.id} post={post}/>)
+  } else if (postStatus === 'failed') {
     content = <p>{error}</p>
   }
 
   return (
     <section className="w-full text-black bg-white ">
       <h2 className="text-3xl font-bold text-center uppercase">Posts</h2>
-      {renderedPosts}
+      {content}
     </section>
   );
 };
