@@ -6,7 +6,7 @@ const PostAuthor = ({ userId }) => {
   const author = users.find((user) => user.id === userId);
   return (
     <div>
-      <div className="font-semibold text-red-500"><span className="font-normal text-black">By</span> {author ? author.name : "Unknown Author"}</div>
+      <div className="font-semibold text-red-500"><span className="font-normal text-black">By : </span> {author ? author.name : "Unknown Author"}</div>
     </div>
   );
 };
